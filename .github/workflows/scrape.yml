@@ -1,0 +1,45 @@
+name: Scrape & Generate Pipeline
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: |
+          npm install
+          cd src && npm install
+
+      - name: Run pipeline
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_USER_AGENT: ${{ secrets.REDDIT_USER_AGENT }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRODUCT_HUNT_API_TOKEN: ${{ secrets.PRODUCT_HUNT_API_TOKEN }}
+          AUTO_PUBLISH_ENABLED: ${{ vars.AUTO_PUBLISH_ENABLED }}
+        run: |
+          cd src && npx ts-node-esm src/cron/run-pipeline.ts
+
+      - name: Report failures
+        if: failure()
+        run: |
+          echo "Pipeline failed. Check logs above."

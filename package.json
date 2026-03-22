@@ -1,0 +1,16 @@
+{
+  "name": "claude-skills-directory",
+  "private": true,
+  "scripts": {
+    "dev": "cd web && npm run dev",
+    "build": "cd web && npm run build",
+    "lint": "cd web && npm run lint",
+    "typecheck": "cd web && npm run typecheck",
+    "scrape": "cd src && npx ts-node src/cron/cli.ts",
+    "pipeline": "cd src && npx ts-node src/cron/run-pipeline.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

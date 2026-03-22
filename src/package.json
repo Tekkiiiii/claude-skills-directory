@@ -1,0 +1,31 @@
+{
+  "name": "src",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scrape": "npx ts-node-esm src/scraper/index.ts",
+    "generate": "npx ts-node-esm src/generator/index.ts",
+    "pipeline": "npx ts-node-esm src/cron/run-pipeline.ts",
+    "cli": "npx ts-node-esm src/cron/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "seed": "npx ts-node-esm src/scripts/seed.ts",
+    "seed:categories": "npx ts-node-esm src/scripts/seed-categories.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "axios": "^1.7.0",
+    "cheerio": "^1.0.0",
+    "dotenv": "^16.4.0",
+    "openai": "^4.0.0",
+    "praw": "^7.6.0",
+    "rss-parser": "^3.13.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.6.0"
+  }
+}

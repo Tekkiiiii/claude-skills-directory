@@ -1,0 +1,10 @@
+src/
+supabase/
+scripts/
+node_modules/
+.env
+.env.local
+.env.example
+CLAUDE.md
+README.md
+tsconfig.json
