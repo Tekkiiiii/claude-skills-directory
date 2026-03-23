@@ -13,10 +13,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./web/*"]
-    }
+    "baseUrl": "."
   },
   "include": ["vercel.ts"],
   "exclude": ["node_modules", "web", "web/node_modules", "web/.next", "dist"]
